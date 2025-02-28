@@ -64,3 +64,6 @@ Du kan også kjøre
 git --no-pager branch -a
 ```
 for å sjekke at alle brancher er kommet med.
+
+
+[Oppgave 2](./Oppgave2.md)
