@@ -21,7 +21,19 @@ git clone git@github.com:RasmanTuta/git-intro-workshop.git
 ## Bytte Remote Repository
 For at ikke alle som jobber med workshop-en skal gå i beina på hverandre, må vi bytte `remote` på den lokale klonen.
 Dette kan vi gjøre på et par forskjellige måter.
-### 1. Opprette et nytt repo i egen GitHub-konto
+### 1. Bruke lokalt fil-basert lokalt repo
+Det er opprettet et fil-basert repo inne i workshop-folderen. Dette ligger i folderen `/repo.git` 
+Ved å sette `origin`til å peke på dette, vil det fungere som et remote repo selv om det befinner seg lokalt på disken din.
+```shell
+git remote remove origin
+git remote add origin ./repo.git
+git branch -M main
+git push -u origin main
+git branch --unset-upstream
+git push --set-upstream origin --all
+```
+
+### 2. Opprette et nytt repo i egen GitHub-konto
 I en nettleser, gå til hjemmesiden din på github: [https://github.com/din-bruker-her](https://github.com/<din bruker her>)
 Oppe i høyre hjørnet, trykk på `+` og velg `New Repository`
 Gi det nye repoet et navn og trykk `Create repository`
@@ -36,18 +48,6 @@ git branch --unset-upstream
 git push --set-upstream origin --all
 ```
 
-### 2. Opprette et nytt fil-basert lokalt repo
-
-```shell
-mkdir -p repo.git
-git init --bare ./repo.git
-git remote add origin ./repo.git
-git branch -M main
-git push -u origin main
-git branch --unset-upstream
-git push --set-upstream origin --all
-```
-
 ## Sjekke om ny remote har blitt korrekt satt
 Om du kjører 
 ```shell
@@ -55,8 +55,8 @@ git remote -v
 ```
 så skal resultatet vise to linjer med referanse til det `origin` ble satt til
 ```text
-origin  git@github.com:RasmanTuta/git-intro-workshop.git (fetch)
-origin  git@github.com:RasmanTuta/git-intro-workshop.git (push)
+origin  ./repo.git (fetch)
+origin  ./repo.git (push)
 ```
 
 Du kan også kjøre 

@@ -1,0 +1,9 @@
+*
+!/hooks/
+!/info/
+!/description
+!/config
+!/HEAD
+!/refs/
+!/objects/
+!/packed-refs
