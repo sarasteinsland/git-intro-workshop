@@ -81,3 +81,28 @@ For å  legge endringene opp på remote repo, kan du nå kjøre
 ```shell
 git push origin
 ```
+
+## gitconfig
+Git lagrer konfigurasjon du har satt i konfig-filer. 
+ - Din globale konfigurasjon, som gjelder for alle repoene dine, ligger i din hjemmekatalog i fila`.gitconfig`. 
+   For å endre denne må kommandoer ha `--global` 
+ - Konfigurasjon for et enkelt repository ligger i fila `.git/gitconfig`. Denne endres med `--local` som også er standard.
+   Så om du gjør en `git set ...` uten noen 'switch', så er det den lokale som endres.
+
+Den globale konfigurasjonen din kan listes ut med `git config list --global`.
+En enkelt i konfigurasjonen, for eksempel brukernavn, kan listes ut med `git config --get user.name`.
+Om du sammenlikner dette med hva om ligger i `.gitconfig`, så ser du at fra kommandolinja så bruker vi ´[section].key` for å navngi konfigurasjon.
+
+Du kan også editere hele konfigurasjonen i standard teksteditor ved å kjøre `git config edit --global`
+
+### Alias
+En praktisk 'feature' i konfigurasjonen er `alias`. 
+Et alias er en ny, som regel veldig kort, git kommando som du kan definere selv i stedet for mye brukte, lengre kommandoer.
+
+Om du kjører `git config set --global alias.st "status"` vil du få en ny git kommando som du kan kjøre som `git st` som har samme effekt som `git status`.
+
+Du kan også endre denne ved å kjøre `git config edit --global` og legge til 
+```text
+[alias]
+    st = status
+```
