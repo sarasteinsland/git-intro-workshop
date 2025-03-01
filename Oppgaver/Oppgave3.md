@@ -33,14 +33,17 @@ En kan se her at formatet er `SHA(branch)Commit-melding`.
 
 Om en putter på `--graph` på en log-kommando, så vil utskriften få en simple graf som bruker streker å stjerner for å indikere grener i historikken.
 Om historikken er lineær, vil ikke dette bli spesielt spennende, men om en har merge-et inn grener vil det kanskje ha mer nytte.
-Om du sjekker ut `Oppgave3` med `git checkout Oppgave3` og kjører `git --no-pager log --graph --oneline log -4`, så vil du få noe som ser ut ca. slik:
+Om du sjekker ut `Oppgave3` med `git checkout Oppgave3` og kjører `git --no-pager log --graph --oneline log -6`, så vil du få noe som ser ut ca. slik:
 ```text
-*   ff7e4ab (HEAD -> Oppgave3) Merge branch 'Oppgave3-2' into Oppgave3
+* 44abeff (HEAD -> Oppgave3) Og enda en
+* 64c1e36 En commit til
+*   7952497 Merge branch 'Oppgave3-2' into Oppgave3
 |\  
-| * a003639 kommit gjort i annen branch
+| * fe5022a kommit gjort i annen branch
+* | a3dbf59 Første commit i Oppgave 3 branch
 |/  
-* 4e387c0 (origin/main, origin/HEAD, main) Lagt til gitconfig
-* 96f731a (origin/Oppgave1, Oppgave1) fikset Oppgave 1 fremgangsmåte
+* a1ceba7 (main) Start på Oppgave 3
+
 ```
 Her kan en se at en commit er gjort i en annen branch for så å ha blitt merge-et inn med en merge commit.
 Du kommer tilbake til hoved-branch-en med `git checkout main`
@@ -49,3 +52,13 @@ Om du vil se historikken mellom to punkter i historien, kan dette gjøres ved å
 Dette vil liste opp commits fra `<commit 1>` eksklusiv og til `<commit 2>`inklusiv. 
 En kan her bruke noe som entydig identifiserer en commit. 
 Dette kan være en commit SHA eller et tag-navn. For eksempel, om en bruker `tags` for å markere releaser, vil `git --no-pager log --oneline 3.0...3.1` gi historikken mellom tag for release`3.0` og tag for release `3.1`.
+
+Om du kjører dette, skal du få noe som likner:
+```text
+64c1e36 (tag: 3.1) En commit til
+7952497 Merge branch 'Oppgave3-2' into Oppgave3
+fe5022a (Oppgave3-2) kommit gjort i annen branch
+```
+
+Mer informasjon om git log finner du på [https://git-scm.com/docs/git-log](https://git-scm.com/docs/git-log)
+
