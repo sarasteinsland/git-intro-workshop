@@ -1,9 +1,11 @@
-*
-!/hooks/
-!/info/
-!/description
-!/config
-!/HEAD
-!/refs/
-!/objects/
-!/packed-refs
+# Ignore everything by default
+repo.git/*
+
+# Allow necessary Git internals
+!repo.git/HEAD
+!repo.git/config
+!repo.git/description
+!repo.git/hooks/
+!repo.git/info/
+!repo.git/objects/
+!repo.git/refs/
