@@ -25,12 +25,16 @@ Dette kan vi gjøre på et par forskjellige måter.
 Det er opprettet et fil-basert repo inne i workshop-folderen. Dette ligger i folderen `/repo.git` 
 Ved å sette `origin`til å peke på dette, vil det fungere som et remote repo selv om det befinner seg lokalt på disken din.
 ```shell
-git remote remove origin
 mkdir repo.git
 git init --bare repo.git
-git remote add origin ./repo.git
-git push --all origin
-git push --set-upstream origin --all
+git clone --mirror https://github.com/RasmanTuta/git-intro-workshop.git mirror
+cd mirror
+git remote set-url origin ../repo.git
+git push --mirror origin
+cd ..
+rm -rf mirror
+git clone repo.git git-intro-workshop
+cd git-intro-workshop
 ```
 
 ### 2. Opprette et nytt repo i egen GitHub-konto
@@ -38,14 +42,29 @@ I en nettleser, gå til hjemmesiden din på github: [https://github.com/din-bruk
 Oppe i høyre hjørnet, trykk på `+` og velg `New Repository`
 Gi det nye repoet et navn og trykk `Create repository`
 
-Vi skal nå følge beskrivelsen under `…or push an existing repository from the command line` med en liten endring:
+Normalt når en oppretter ett nytt repo på GitHub for å jobbe med et repo opprettet lokalt, Vile en følge oppskriften under `…or push an existing repository from the command line`.
+Vi må følge en litt annen tilnærming som ligner litt mere punkt 1 over:
 ```shell
-git remote remove origin
-git remote add origin https://github.com/<Din-Bruker-Her>/<ditt-repo-navn-her>.git
-git branch -M main
-git push -all origin
-git branch --unset-upstream
-git push --set-upstream origin --all
+git clone --mirror https://github.com/RasmanTuta/git-intro-workshop.git mirror
+cd mirror
+git remote set-url origin https://github.com/<Din-Bruker-Her>/<ditt-repo-navn-her>.git
+git push --mirror origin
+cd ..
+rm -rf mirror
+git clone https://github.com/<Din-Bruker-Her>/<ditt-repo-navn-her>.git git-intro-workshop
+cd git-intro-workshop
+```
+
+### 3. Bruke `fork` fra GitHub
+GitHub har en `fork` funksjon som lar deg lage en kopi av et repo inn i din GitHub-bruker:
+
+ - Gå til [https://github.com/RasmanTuta/git-intro-workshop](https://github.com/RasmanTuta/git-intro-workshop)
+ - Oppe til høyre vil du se teksten `Fork` med en pil ned. Trykk pilen og velg `Create a new fork`
+ - Følg instruksjonene som følger.
+ - Deretter kloner du din nye fork lokalt:
+```shell
+git clone https://github.com/<Din-Bruker-Her>/<ditt-klone-navn-her>.git git-intro-workshop
+cd git-intro-workshop
 ```
 
 ## Sjekke om ny remote har blitt korrekt satt
