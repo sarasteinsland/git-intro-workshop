@@ -106,3 +106,4 @@ Du kan også endre denne ved å kjøre `git config edit --global` og legge til
 [alias]
     st = status
 ```
+[Oppgave 3](./Oppgave3.md)
