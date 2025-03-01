@@ -1,28 +1,12 @@
 # Oppgave 1
 I denne oppgaven vil vi klone repoet lokalt.
 For å kunne 'pushe' endringer til et remote repo vil det kreve at alle enten setter opp et remote repo i sin egen github-konto, eller lager et lokalt, filbasert repo.
-En kan også hoppe over dette, men en vil da ikke kunne gjennomføre deloppgaver der et remote repo er påkrevet.
-## Klone Workshop-Repoet
-For å kunne jobbe med workshop-en må en klone workshop-repoet fra GitHub.
-I en kommandolinje, flytt deg inn i en folder der du har prosjekter. Du kan også bare klone det i hjemme-folderen din.
-```shell
-git clone https://github.com/RasmanTuta/git-intro-workshop.git
-```
-Det blir da opprettet en ny folder med samme navnet som repoet: `git-intro-workshop`
-Om du ønsker å ha et annet navn på repoet, så legger du bare ønsket navn på slutten av kommandoen:
-```shell
-git clone https://github.com/RasmanTuta/git-intro-workshop.git git-intro-123
-```
-Om en har [satt opp en github-konto med SSH-nøkkel](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) kan en også klone repoet med SSH:
-```shell
-git clone git@github.com:RasmanTuta/git-intro-workshop.git
-```
 
-## Bytte Remote Repository
-For at ikke alle som jobber med workshop-en skal gå i beina på hverandre, må vi bytte `remote` på den lokale klonen.
+## Opprette en kopi av Remote Repository
+For at ikke alle som jobber med workshop-en skal gå i beina på hverandre, må på en eller annen måte opprette en kopi av det orginale repoet.
 Dette kan vi gjøre på et par forskjellige måter.
 ### 1. Bruke lokalt fil-basert lokalt repo
-Det er opprettet et fil-basert repo inne i workshop-folderen. Dette ligger i folderen `/repo.git` 
+Vi kan sette opp et fil-basert lokalt repo og flytte koden inn i dette.
 Ved å sette `origin`til å peke på dette, vil det fungere som et remote repo selv om det befinner seg lokalt på disken din.
 ```shell
 mkdir repo.git
@@ -63,7 +47,7 @@ GitHub har en `fork` funksjon som lar deg lage en kopi av et repo inn i din GitH
  - Følg instruksjonene som følger.
  - Deretter kloner du din nye fork lokalt:
 ```shell
-git clone https://github.com/<Din-Bruker-Her>/<ditt-klone-navn-her>.git git-intro-workshop
+git clone https://github.com/<Din-Bruker-Her>/<ditt-fork-navn-her>.git git-intro-workshop
 cd git-intro-workshop
 ```
 
