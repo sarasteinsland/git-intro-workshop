@@ -26,9 +26,10 @@ Det er opprettet et fil-basert repo inne i workshop-folderen. Dette ligger i fol
 Ved å sette `origin`til å peke på dette, vil det fungere som et remote repo selv om det befinner seg lokalt på disken din.
 ```shell
 git remote remove origin
+git init --bare repo.git
 git remote add origin ./repo.git
 git branch -M main
-git push -u origin main
+git push --all origin
 git branch --unset-upstream
 git push --set-upstream origin --all
 ```
@@ -43,7 +44,7 @@ Vi skal nå følge beskrivelsen under `…or push an existing repository from th
 git remote remove origin
 git remote add origin https://github.com/<Din-Bruker-Her>/<ditt-repo-navn-her>.git
 git branch -M main
-git push -u origin main
+git push -all origin
 git branch --unset-upstream
 git push --set-upstream origin --all
 ```
