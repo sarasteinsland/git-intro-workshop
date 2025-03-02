@@ -62,3 +62,4 @@ fe5022a (Oppgave3-2) kommit gjort i annen branch
 
 Mer informasjon om git log finner du på [https://git-scm.com/docs/git-log](https://git-scm.com/docs/git-log)
 
+[Oppgave 4](./Oppgave4.md)
