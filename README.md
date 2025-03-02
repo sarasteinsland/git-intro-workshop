@@ -13,4 +13,7 @@ Verktøy for å løse konflikter kan også være greit å ha. De konfliktene vi 
 
 Oppgavene i workshop-en er beskrevet i egne markdown dokumenter. [Den første oppgaven finner du her](./Oppgaver/Oppgave1.md).
 
+Det kan være en fordel å lese oppgaveteksten i en nettleser. Både fordi de er skrevet i markdown som GitHub rendrer som HTML, 
+men også fordi noen av de branchene vi skal inn i for å løse oppgaver ikke er oppdatert med hensyn på oppgaveteksten.  
+
 
