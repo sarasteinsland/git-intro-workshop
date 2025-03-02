@@ -194,4 +194,4 @@ gitGraph
 Om du sammenlikner loggen av `oppgave5-rebase` før og etter at vi har gjennomført rebase, vil du se at SHA-ene til `commit 2` og `commit 4` har endret seg.
 Dette er fordi commit-ene har fått ny parent-commit.
 
- 
+[Oppgave 6](./Oppgave6.md)
