@@ -89,6 +89,16 @@ Merge branch 'oppgave6-fix' into oppgave6-main
 En kan velge å beholde denne eller skrive en litt mer utfyldende tekst med hvilken konflikt som ble løst.
 Om du legger til linjeskift i en commit-melding, så vil all tekst komme med, men bare første linje vil vises i `git log`
 
+Om du kjører `git --no-pager log --oneline --graph -4` vil du se at de to branchene er merg-et med en ny commit med meldingen du la til:
+```text
+*   5b8b70a (HEAD -> oppgave6-main) Merge branch 'oppgave6-fix' into oppgave6-main
+|\  
+| * 00c8b6c (origin/oppgave6-fix, oppgave6-fix) lagt til nytt avsnitt
+* | dce874f (origin/oppgave6-main) lagt til avsnitt
+|/  
+* 9c10828 Lagt til tekst
+```
+
 ## Hjelp koden kompilerer ikke
 Konflikten vi løste over var temmelig enkel. 
 I kode vil typisk liknende konflikter være to funksjoner lagt til i slutten av en fil. 
@@ -98,5 +108,47 @@ Veldig ofte er det mer komplisert.
 > Etter å ha løst en konflikt, er det viktig å kompilere og kjøre tester før en push-er koden remote. 
 > Det er mye mindre styr å rydde opp i dette lokalt heller enn å fikse det etter at koden er push-et til main.
 
+Uansett hvor mye en kludrer det til, så kan man alltid gå tilbake til startpunktet å prøve igjen.
 
- 
+Om vi ser på loggen vi fikk etter at vi var ferdig med å merge, så ser vi at siste commit på `oppgave6-main` har SHA `dce874f`
+Om vi vil tilbake dit kan vi kjøre `git reset --hard dce874f` på `oppgave6-main`. 
+
+Om du nå kjører `git log` så ser du at vi er tilbake til slik det var før `merge`.
+
+Et annet veldig viktig verktøy å ha er `git reflog`.
+Alle operasjoner vi gjør legger spor i `reflog`. 
+Om vi hadde kjørt `git reflog` før vi resatte branch-en ville vi fått noe liknende
+```text
+5b8b70a (HEAD -> oppgave6-main) HEAD@{0}: commit (merge): Merge branch 'oppgave6-fix' into oppgave6-main
+dce874f (origin/oppgave6-main) HEAD@{1}: checkout: moving from oppgave6-fix to oppgave6-main
+00c8b6c (origin/oppgave6-fix, oppgave6-fix) HEAD@{2}: commit: lagt til nytt avsnitt
+9c10828 HEAD@{3}: checkout: moving from oppgave6-main to oppgave6-fix
+dce874f (origin/oppgave6-main) HEAD@{4}: commit: lagt til avsnitt
+9c10828 HEAD@{5}: commit: Lagt til tekst
+369d94f (origin/main, origin/HEAD, main) HEAD@{6}: checkout: moving from main to oppgave6-main
+369d94f (origin/main, origin/HEAD, main) HEAD@{7}: commit: Start Oppgave 6
+```
+På linje to ser vi resultatet av å kjøre `git checkout oppgave6-main`. 
+En ser at SHA-en i begynnelsen av denne linja er den samme som vi brukte i `reset` over.
+
+Selv etter kompliserte omskrivinger av git-historien vil de tidligere commit-ene ligge i `reflog`.
+En kan dermed alltid gå tilbake til et tidligere punkt i historien.
+
+Om du ikke har kjørt `git reset` som beskrevet over, gjør det nå. Vi skal nå løse samme konflikt under en `rebase`
+
+## Konfliktløsing under rebase
+
+Konfliktløsing under `rebase` er veldig likt det vi gjorde under ´merge`
+Hovedforskjellene er at en kan risikere å løse konflikter i samme fila flere ganger. 
+Ikke samme konflikt, men om en har sjekket inn endringer i samme fil med flere commits, så vil de måtte løses en commit av gangen.
+Potensielt så gjør det den enkelte konflikten enklere å løse.
+
+Det vil heller ikke lages en ny commit etter at en konflikt er løst. Løsningen vil bli lagt inn under den eksisterende commit.
+
+om vi sjekker ut `oppgave6-fix` og rebase-er denne på `oppgave6-main`, så må vi løse samme konflikt en gang til.
+Vi kunne også gjort det andre veien, men det er relativt vanlig å løse eventuelle konflikter i din egen branch. Typisk en feature-branch.
+```shell
+git checkout oppgave6-fix
+git rebase oppgave6-main
+```
+
