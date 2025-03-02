@@ -76,65 +76,61 @@ Hvor ofte en commit-er endringer er litt personlige preferanser og kanskje noe e
 Dette vil kunne variere fra enkelte som lager en commit der andre ville trykket 'save'.
 Andre igjen lager en stor commit når en feature er ferdig. Personlig havner jeg nok i en kategori midt i mellom.
 
-Om det er kode en skriver, vil det typisk være en god regel at en commit skal ikke ha kompileringsfeil og tester skal kjøre. 
-## Endringer fra Main-Branch
+Om det er kode en skriver, vil det typisk være en god regel at en commit skal ikke ha kompileringsfeil og tester skal kjøre.
 
-Om en feature tar så lang tid at det rekker å skje endringer i `main` før dine egne endringer er det lurt å jevnlig ta disse inn i din branch.
-Dette kan gjøres på to måter: Merge av `main` inn i din feature branch eller å 'rebase' din feature branch på toppen av `main`
-Det er praktisk å gjøre dette på main sin `remote tracking branch` som kan navngis med `origin/main`.
+## Git Stash
 
-For å være sikker på at denne er i synk med det som ligger sentralt, kjører man `git fetch`
-Deretter kjører man enten `git merge origin/main` eller `git rebase origin/main`
+Om en er midt i en endring, og så bare **må** gjøre noe annet, er `git stash` en fin funksjon.
+Denne tar alle endringer som ikke er commitet å ster det bort. 
+En kan senere hente disse frem igjen med `git stash pop`
 
-Om en har følgende historikk:
-```mermaid
-%%{init: { 'logLevel': 'debug', 'theme': 'base' } }%%
-gitGraph
-    commit id: "A"
-    branch feature
-    checkout feature
-    commit id: "B"
-    checkout main
-    commit id: "C"
-    checkout feature
-    commit id: "D"
-    checkout main
-    commit id: "E"
+Test dette ut på følgende måte:
+1) Gjør en endring i en fil. Kjør `git status` og verifiser at det er en endring.
+2) Kjør `git stash` for så køre `git status` og se at det ikke lenger er en endring.
+3) Kjør `git stash pop` og deretter `git version` for så å se at endringen er tilbake
+
+Vær obs på at om du 'stash-er', gjør en annen eendring som du commit-er og så pop-er stash-en, 
+så kan dette føre til en konflikt som må løses. Mer om dette senere.  
+
+## Git Commit Amend
+
+En annen måte å løse samme problematikk er å lage en ny commit med de endringer en står oppe i.
+For eksempel ved å kjøre `git commit -a -m "work in progress"`
+En kan da for eksempel flytte over i en annen branch for å løse et problem uten å dra med seg filer somikke er comittet.
+Senere kan en da, etter å ha gjort ferdig det en holdt på med, legge dette til forrige commit med `git commit -a --amend`
+En får da opp en editor med den opprinnelige commit-meldingen. 
+Du kan nå endre melding til det den egentlig skal være.
+
+`git commit --amend` kan også brukes om du finner ut at forrige commit har en typo i meldingen. 
+Om det ikke er endringer, vil du fortsatt få mulighet til å endre meldingen.
+
+Test dette ut på følgende måte:
+1) Gjør en endring i en fil. Kjør `git status` og verifiser at det er en endring.
+2) Kjør `git commit -a -m "wip"` for så køre `git status` og se at det ikke lenger er en endring.
+3) Gjør en ny endring i en fil. Kjør `git status` og verifiser at det er en endring.
+3) Kjør `git commit -a --amend`, gi commiten en ny melding.
+4) Kjør så `git --no-pager log --oneline -2` og verifiser at du bare har fått en ny commit og at denne har din nye melding.
+
+## Pushe Endringer
+Om du jobber på et team der man gjennomfører Pull Request, er det nå på tide å få endringene dine opp på den sentrale serveren. 
+Dette gjøres med `git push <remote> <branch>`.
+`<remote>` vil for de fleste tilfeller være `origin`.
+`branch` er gjeldende branch, så for oppgaven vil dette være `Oppgave4`
+
+ - Kjør `git push origin Oppgave4`. 
+ - Om du kjører dette mot GitHub, vil du få en melding tilbake som gir en lenke til å lage en ny Pull Request:
+```text
+...
+remote: Create a pull request for 'Oppgave4' on GitHub by visiting:
+remote:      https://github.com/RasmanTuta/git-intro-workshop/pull/new/Oppgave4
+remote: 
+...
 ```
-Om en kjører `git merge origin/main`, vil en få:
-```mermaid
-%%{init: { 'logLevel': 'debug', 'theme': 'base' } }%%
-gitGraph
-    commit id: "A"
-    branch feature
-    checkout feature
-    commit id: "B"
-    checkout main
-    commit id: "C"
-    checkout feature
-    commit id: "D"
-    checkout main
-    commit id: "E"
-    checkout feature
-    merge main id: "merge main into feature"
-```
-Om en kjører `git rebase origin/main` vil en få en mer lineær historikk:
-```mermaid
-%%{init: { 'logLevel': 'debug', 'theme': 'base' } }%%
-gitGraph
-    commit id: "A"
-    checkout main
-    commit id: "C"
-    checkout main
-    commit id: "E"
-    branch feature
-    checkout feature
-    commit id: "B'"
-    commit id: "D'"
-```
-En diskusjon som aldri vil bli ferdig er om det ene er bedre enn det andre. 
-Her er det stor grad av personlige preferanser som spiller inn.
+## Merge/Rebase til Main-Branch
+Om du jobber på et prosjekt der en lokalt legger endringer inn i main, og pusher main sentralt, er det tid for dette nå.
 
+Dette skal vi se nærmere på i en senere oppgave.
 
+[Oppgave 5](./Oppgave5.md)
 
 
