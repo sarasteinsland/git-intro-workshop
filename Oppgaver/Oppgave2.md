@@ -2,7 +2,7 @@
 I denne oppgaven skal vi se på `.gitignore` og  `.gitconfig`
 ## .gitignore
 `.gitignore` er en fil som beskriver filer og foldere som ikke skal eller ikke skal regnes med inn i commits. 
-Typisk legger en denne fila i rot-folderen til prosjektet. Reglene en legger inn i denne fila vil lgjelde for hele prosjektet.
+Typisk legger en denne fila i rot-folderen til prosjektet. Reglene en legger inn i denne fila vil gjelde for hele prosjektet.
 
 Om en ønsker å overstyre de globale reglene, kan en ny `.gitignore`-fil legges i en underkatalog.
 Her kan en opprette nye regler for filer som skal ignoreres, eller oppheve regler som er laget på et mer generelt nivå.
@@ -56,7 +56,7 @@ mkdir killroy
 echo Killroy was here>killroy/killroy.txt
 ```
 
-Om du nå kjører `git st` vil du få:
+Om du nå kjører `git status` vil du få:
 ```text
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -84,10 +84,10 @@ git push origin
 
 ## gitconfig
 Git lagrer konfigurasjon du har satt i konfig-filer. 
- - Din globale konfigurasjon, som gjelder for alle repoene dine, ligger i din hjemmekatalog i fila`.gitconfig`. 
+ - Din globale konfigurasjon, som gjelder for alle repoene dine, ligger i din hjemmekatalog i fila`~/.gitconfig`. 
    For å endre denne må kommandoer ha `--global` 
  - Konfigurasjon for et enkelt repository ligger i fila `.git/gitconfig`. Denne endres med `--local` som også er standard.
-   Så om du gjør en `git set ...` uten noen 'switch', så er det den lokale som endres.
+   Så om du gjør en `git config set ...` uten noen 'switch', så er det den lokale som endres.
 
 Den globale konfigurasjonen din kan listes ut med `git config list --global`.
 En enkelt i konfigurasjonen, for eksempel brukernavn, kan listes ut med `git config --get user.name`.
