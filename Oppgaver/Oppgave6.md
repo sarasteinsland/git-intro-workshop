@@ -151,4 +151,76 @@ Vi kunne også gjort det andre veien, men det er relativt vanlig å løse eventu
 git checkout oppgave6-fix
 git rebase oppgave6-main
 ```
+Vi får da teksten 
+```text
+Auto-merging Oppgaver/Oppgave 6/lorem.txt
+CONFLICT (content): Merge conflict in Oppgaver/Oppgave 6/lorem.txt
+error: could not apply 00c8b6c... lagt til nytt avsnitt
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
+Could not apply 00c8b6c... lagt til nytt avsnitt
+```
+Vi kan løse konflikten på samme måte som over ved å fjerne markeringene i fila og lagre. 
 
+Veien videre, som beskrevet i teksten over er litt anderledes. Her holder det med å legge til fila, ikke lage en commit, og så kjøre `git rebase --continue`.
+```shell
+git add .
+git rebase --continue
+```
+vi får da 
+```text
+[detached HEAD 70fec94] lagt til nytt avsnitt
+ 1 file changed, 2 insertions(+)
+Successfully rebased and updated refs/heads/oppgave6-fix.
+```
+og er ferdig. 
+
+Om vi ser på loggen så vil den vise at commit-ene fra `oppgave6-main` main er lagt før commit-en fra `oppgave6-fix`.
+```text
+* 70fec94 (HEAD -> oppgave6-fix) lagt til nytt avsnitt
+* dce874f (origin/oppgave6-main, oppgave6-main) lagt til avsnitt
+* 9c10828 Lagt til tekst
+* 369d94f Start Oppgave 6
+```
+Om vi nå gjør en `git reflog` vil resultatet bli:
+```text
+70fec94 (HEAD -> oppgave6-fix) HEAD@{0}: rebase (finish): returning to refs/heads/oppgave6-fix
+70fec94 (HEAD -> oppgave6-fix) HEAD@{1}: rebase (continue): lagt til nytt avsnitt
+dce874f (origin/oppgave6-main, oppgave6-main) HEAD@{2}: rebase (start): checkout oppgave6-main
+00c8b6c (origin/oppgave6-fix) HEAD@{3}: checkout: moving from main to oppgave6-fix
+63913d7 (main) HEAD@{4}: commit: wip
+0df57f6 (origin/main, origin/HEAD) HEAD@{5}: commit: oppgave 6, start rebase
+910ecfc HEAD@{6}: commit: Litt mere oppgave 6
+369d94f HEAD@{7}: checkout: moving from oppgave6-main to main
+dce874f (origin/oppgave6-main, oppgave6-main) HEAD@{8}: reset: moving to dce874f
+5b8b70a HEAD@{9}: commit (merge): Merge branch 'oppgave6-fix' into oppgave6-main
+```
+og vi ser at vi kan finne tilbake til startpunktet i den linja som kommer før den som inneholder teksten `rebase (start)`.
+Det er den som starter med SHA-en `00c8b6c`.
+
+## Konkliktløsing med grafisk verktøy
+
+Det finnes flere verktøy for å løse konflikter med et grafisk brukergrensesnitt.
+
+De fleste IDE-er, så som IntelliJ og Visual Studio Code, vil ha dette innebygget.
+
+Beskrivelsen under er tatt fra IntelliJ, der en finner det under menyen `Git -> Resolve Conflict`.
+Dette åpner først følgende dialog
+
+
+![conflict](./Images/conflict.png)
+
+Her listes alle filer med konflikt opp. En kan velge en og en og trykke  ´Merge...`
+
+![merge](./Images/resolve.png)
+En får da opp et vindu med de to orginalene på hver side og resultatet i midten.
+
+Hver konflikt vises i en anne farge, og man kan legge den til i resultatet med `>>` eller utelate den men `X`.
+Noen ganger, om en konflikt er litt komplisert, må man kanskje også gjøre litt manuelle endringer. 
+Det kan gjøres i resultatvinduet.
+
+Når alle konflikter i fila er løst, trykker man `Apply` og en er ferdig med den fila. 
+Når alle filer med konflikter er i orden, kan man gå tilbake og kjøre `git rebase --continue`.
