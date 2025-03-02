@@ -87,13 +87,53 @@ git --no-pager log --oneline --graph -3
 ```
 og du skal få noe som likner på 
 ```text
-* 1c5a0c0 (HEAD -> oppgave5-merge, origin/oppgave5-merge) Commit 4
-* e0351ee commit 2
-* e93750d commit 1
+* 0c0f780 (HEAD -> oppgave5-merge, origin/oppgave5-rebase, origin/oppgave5-merge, oppgave5-rebase) commit 4
+* 3aeae84 commit 2
+* 72cb8f0 commit 1
 ```
-
-
-
+Om du gjør følgende:
+```shell
+git checkout oppgave5-main
+git --no-pager log --oneline --graph -3
+```
+får du omtrent
+```text
+* 506a016 (HEAD -> oppgave5-main, origin/oppgave5-main) commit 5
+* 1cf1868 commit 3
+* 72cb8f0 commit 1
+```
+Om vi nå gjør en merge av `oppgave5-main` inn i `oppgave5-merge`:
+```shell
+git checkout oppgave5-merge
+git merge oppgave5-main
+```
+Vil vi få en ny historikk med en merge-commit om vi kjører `git --no-pager log --oneline --graph -6`:
+```text
+*   2ed8003 (HEAD -> oppgave5-merge) Merge branch 'oppgave5-main' into oppgave5-merge
+|\  
+| * 506a016 (origin/oppgave5-main, oppgave5-main) commit 5
+| * 1cf1868 commit 3
+* | 0c0f780 (origin/oppgave5-rebase, origin/oppgave5-merge, oppgave5-rebase) commit 4
+* | 3aeae84 commit 2
+|/  
+* 72cb8f0 commit 1
+```
+eller
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'base', 'gitGraph': {'showBranches': true, 'showCommitLabel':true,'mainBranchName': 'oppgave5-main'}} }%%
+gitGraph
+    checkout oppgave5-main
+    commit id: "commit 1"
+    branch oppgave5-merge
+    checkout oppgave5-merge
+    commit id: "commit 2"
+    commit id: "commit 4"
+    checkout oppgave5-main
+    commit id: "commit 3"
+    commit id: "commit 5"
+    checkout oppgave5-merge
+    merge oppgave5-main id: "Merge branch..."
+```
 
 
  
