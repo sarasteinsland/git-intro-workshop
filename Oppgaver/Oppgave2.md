@@ -81,6 +81,9 @@ For å  legge endringene opp på remote repo, kan du nå kjøre
 ```shell
 git push origin
 ```
+> [!NOTE]
+> Filer som allerede er lagt til i indeksen med `git add`, vil ikke bli fjernet bare ved å legge dem til i `.gitignore`.
+> For å 'unstage' dem, eller fjerne dem fra indeksen, kan en kjøre `git rm --cached <filnavn>`
 
 ## gitconfig
 Git lagrer konfigurasjon du har satt i konfig-filer. 

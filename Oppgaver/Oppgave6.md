@@ -224,3 +224,6 @@ Det kan gjøres i resultatvinduet.
 
 Når alle konflikter i fila er løst, trykker man `Apply` og en er ferdig med den fila. 
 Når alle filer med konflikter er i orden, kan man gå tilbake og kjøre `git rebase --continue`.
+
+[Oppgave 7](./Oppgave7.md)
+

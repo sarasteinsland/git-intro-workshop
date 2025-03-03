@@ -96,7 +96,7 @@ så kan dette føre til en konflikt som må løses. Mer om dette senere.
 
 En annen måte å løse samme problematikk er å lage en ny commit med de endringer en står oppe i.
 For eksempel ved å kjøre `git commit -a -m "work in progress"`
-En kan da for eksempel flytte over i en annen branch for å løse et problem uten å dra med seg filer somikke er comittet.
+En kan da for eksempel flytte over i en annen branch for å løse et problem uten å dra med seg filer som ikke er comittet.
 Senere kan en da, etter å ha gjort ferdig det en holdt på med, legge dette til forrige commit med `git commit -a --amend`
 En får da opp en editor med den opprinnelige commit-meldingen. 
 Du kan nå endre melding til det den egentlig skal være.
