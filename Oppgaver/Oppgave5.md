@@ -134,6 +134,24 @@ gitGraph
     checkout oppgave5-merge
     merge oppgave5-main id: "Merge branch..."
 ```
+
+Om vi nå prøver å push-e disse endringene opp til server med
+```shell
+git push origin oppgave5-merge
+```
+vil vi se at dette går helt greit, og at responsen blir noe liknende
+```text
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 800 bytes | 800.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+To /Users/kristian/projects/rasmantuta/repo.git
+   0c0f780..2dcf65f  oppgave5-merge -> oppgave5-merge
+```
+
+
 ## Bruke Git Rebase
 Branch-en `oppgave5-rebase har samme utgangspunkt som `oppgave5-merge`
 
@@ -193,5 +211,46 @@ gitGraph
 ```
 Om du sammenlikner loggen av `oppgave5-rebase` før og etter at vi har gjennomført rebase, vil du se at SHA-ene til `commit 2` og `commit 4` har endret seg.
 Dette er fordi commit-ene har fått ny parent-commit.
+
+Om vi prøver å kjøre 
+```shell
+git push origin oppgave5-rebase
+```
+Vil dette feile med at dette ikke lar seg gjøre:
+```text
+To /Users/kristian/projects/rasmantuta/repo.git
+ ! [rejected]        oppgave5-rebase -> oppgave5-rebase (non-fast-forward)
+error: failed to push some refs to '/Users/kristian/projects/rasmantuta/repo.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+Dette er fordi vi ved `rebase` har stokket om på historikken. 
+
+For at vi skal kunne push-e etter en `rebase` så må vi tvinge denne opp ved å bruke `forced push`.
+Dette er litt skummelt og enkelte vil anbefale mot det. 
+
+Å bruke `forced push` på `main` skal vi ikke gjøre med mindre det er siste utvei. 
+( Eller om du jobber i et repo helt aleine. )
+
+Om du jobber i en feature branch, så er dette helt innenfor.
+Om andre jobber på samme branch, er det greit å koordinere dette, så ingen andre push-er opp endringer mens en selv  gjør en `forced push`.
+
+kjør 
+```shell
+git push -f origin oppgave5-rebase
+```
+og endringene skal nå gå greit gjennom.
+```text
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (10/10), 2.43 KiB | 2.43 MiB/s, done.
+Total 10 (delta 3), reused 2 (delta 0), pack-reused 0 (from 0)
+To /Users/kristian/projects/rasmantuta/repo.git
+ + 0c0f780...12e6b78 oppgave5-rebase -> oppgave5-rebase (forced update)
+```
 
 [Oppgave 6](./Oppgave6.md)
