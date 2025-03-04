@@ -200,3 +200,5 @@ Om du sjekker historikken, vil du nå få liknende
 * f7c4f9a (origin/oppgave7-2) Lagt til ny slutt
 * b923251 Lagt til avsnitt
 ```
+
+[Oppgave 8](./Oppgave8.md)
