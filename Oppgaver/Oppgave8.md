@@ -102,6 +102,8 @@ pick 9077412 Slettet avsnitt i lingues.txt
 Følg instruksjonene i lista over, og endre fila for å utføre riktige endringer. Når du er ferdig, lagre og steng editor.
 Underveis vil `rebase` stoppe flere ganger og åpne ny editor. 
 Det skal være nok informasjon i teksten hver gang til at du skal kunne utføre det som er nødvendig.
+<br>Når det gjelder instruksjonen for `edit`, så er denne litt vag. Det holder ikke bare å kjøre `git commit --amend`.
+En må først kjøre `git add .`
 
 Etter at du er ferdig, kjør
 ```shell
